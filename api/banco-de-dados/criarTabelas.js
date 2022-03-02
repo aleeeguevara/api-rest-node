@@ -4,5 +4,5 @@ const ModeloTabela = require('../rotas/fornecedores/modeloTabelaFornecedor');
 //dentro do banco de dados precisamos sincronizar
 ModeloTabela
     .sync() //retorna promessa  que deve ser tratada
-    .then(() => console.log('Tabela criada com sucesso'))
+    .then(() => console.log('Tabela criada com sucesso')) //node api/banco-de-dados/criarTabelas
     .catch(console.log)
