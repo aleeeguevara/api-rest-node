@@ -21,7 +21,7 @@ roteador.post('/', async (req, res) => {
 roteador.get('/:idFornecedor', async (req, res) => {
     try{ //tentar executar o codigo para tratar caso ocorra erro no metodo pegarPorId
         const id = req.params.idFornecedor
-        const fornecedor = new Fornecedor({id: id})
+        const fornecedor = new Fornecedor({ id: id })
         await fornecedor.carregar()
         res.send(
             JSON.stringify(fornecedor)
@@ -29,6 +29,24 @@ roteador.get('/:idFornecedor', async (req, res) => {
     }
     catch(erro) {
         res.send(
+            JSON.stringify({
+                mensagem: erro.message
+            })
+        )
+    }
+})
+
+roteador.put('/:idFornecedor', async (req, res) => { //método put atualizar colocar informações novas
+    try{
+        const id = req.params.idFornecedor
+        const dadosRecebidos= req.body
+        const dados = Object.assign({}, dadosRecebidos, { id: id }) //funçao javascript que consegue juntar varios objetos em um só
+        const fornecedor = new Fornecedor(dados) //instancia so recebe um objeto e no caso temos dois, por isso criamos const dados
+        await fornecedor.atualizar()
+        res.end() //quando faz atualização em api rest nao precisa retornar informacao para quem esta consumindo a api, so precisa mostrar que a requisição teve sucesso para simbolizar que conseguiu atualizar 
+    }
+    catch(erro) {
+        res.send(   
             JSON.stringify({
                 mensagem: erro.message
             })

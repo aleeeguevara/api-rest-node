@@ -16,5 +16,15 @@ module.exports = {
             throw new Error('Fornecedor não encontrado')
         }
         return encontrado
+    },
+
+    atualizar(id, dadosParaAtualizar){
+        return Modelo.update(
+            dadosParaAtualizar,
+            {
+                where: { id: id}  //objeto com as instruções para procurar qual a linha da nossa tabela que tem q atualizar, qual o fornecedor correto para atualizar
+                //vai procurar um fornecedor para atualizar utilizando nosso id
+            }
+        )
     }
 }

@@ -33,6 +33,25 @@ class Fornecedor {
         this.versao = encontrado.versao
     }
 
+    async atualizar() { 
+        await TabelaFornecedor.pegarPorId(this.id) //metodo retorna promessa node esperar metodo terminar antes de seguir
+        const campos = ['empresa', 'email', 'categoria'] //algumas propriedades como id, versao, datas o proprio mysql ja atualiza
+        //verificar se os campos sao validos e fornecidos p conseguir pegar e enviar
+
+        const dadosParaAtualizar = {}
+
+        campos.forEach((campo) => {
+            const valor = this[campo]
+            if(typeof valor === 'string' && valor.length > 0) {
+                dadosParaAtualizar[campo] = valor
+            }
+        })
+        if(Object.keys(dadosParaAtualizar).length === 0) {
+            throw new Error('Não foram fornecidos dados para atualizar')
+        } //função javascript que retorna lista com nome das chaves que o obj possui
+
+        await TabelaFornecedor.atualizar(this.id, dadosParaAtualizar)
+    }    
 }
 
 module.exports = Fornecedor;
