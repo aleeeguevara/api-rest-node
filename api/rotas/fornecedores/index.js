@@ -18,4 +18,22 @@ roteador.post('/', async (req, res) => {
     )
 })
 
+roteador.get('/:idFornecedor', async (req, res) => {
+    try{ //tentar executar o codigo para tratar caso ocorra erro no metodo pegarPorId
+        const id = req.params.idFornecedor
+        const fornecedor = new Fornecedor({id: id})
+        await fornecedor.carregar()
+        res.send(
+            JSON.stringify(fornecedor)
+        )
+    }
+    catch(erro) {
+        res.send(
+            JSON.stringify({
+                mensagem: erro.message
+            })
+        )
+    }
+})
+
 module.exports = roteador;
