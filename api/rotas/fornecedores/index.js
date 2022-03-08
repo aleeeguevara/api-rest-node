@@ -10,13 +10,22 @@ roteador.get('/', async (req, res) => {
     );
 });
 roteador.post('/', async (req, res) => {
-    const dadosRecebidos = req.body
-    const fornecedor = new Fornecedor(dadosRecebidos)
-    await fornecedor.criar()
-    res.send(
-        JSON.stringify(fornecedor)
-    )
-})
+    try{
+
+        const dadosRecebidos = req.body
+        const fornecedor = new Fornecedor(dadosRecebidos)
+        await fornecedor.criar()
+        res.send(
+            JSON.stringify(fornecedor)
+            )
+    }catch(erro){
+        res.send(
+            JSON.stringify({
+                mensagem: erro.message
+            })
+        )
+    }
+        })
 
 roteador.get('/:idFornecedor', async (req, res) => {
     try{ //tentar executar o codigo para tratar caso ocorra erro no metodo pegarPorId
