@@ -21,6 +21,7 @@ roteador.post('/', async (req, res) => {
             JSON.stringify(fornecedor)
             )
     }catch(erro){
+        res.status(400)
         res.send(
             JSON.stringify({
                 mensagem: erro.message
@@ -40,6 +41,7 @@ roteador.get('/:idFornecedor', async (req, res) => {
         )
     }
     catch(erro) {
+        res.status(404)
         res.send(
             JSON.stringify({
                 mensagem: erro.message
@@ -59,6 +61,7 @@ roteador.put('/:idFornecedor', async (req, res) => { //método put atualizar col
         res.end() //quando faz atualização em api rest nao precisa retornar informacao para quem esta consumindo a api, so precisa mostrar que a requisição teve sucesso para simbolizar que conseguiu atualizar 
     }
     catch(erro) {
+        res.status(400)
         res.send(   
             JSON.stringify({
                 mensagem: erro.message
@@ -77,6 +80,7 @@ roteador.delete('/:idFornecedor', async (req, res) => {
         res.end()
 
     }catch(erro){
+        res.status(404)
         res.send(
             JSON.stringify({
             mensagem: erro.message
