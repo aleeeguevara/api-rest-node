@@ -51,7 +51,11 @@ class Fornecedor {
         } //função javascript que retorna lista com nome das chaves que o obj possui
 
         await TabelaFornecedor.atualizar(this.id, dadosParaAtualizar)
-    }    
+    }
+    
+    remover() {
+        return TabelaFornecedor.remover(this.id)
+    }
 }
 
 module.exports = Fornecedor;

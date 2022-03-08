@@ -22,9 +22,15 @@ module.exports = {
         return Modelo.update(
             dadosParaAtualizar,
             {
-                where: { id: id}  //objeto com as instruções para procurar qual a linha da nossa tabela que tem q atualizar, qual o fornecedor correto para atualizar
+                where: { id: id }  //objeto com as instruções para procurar qual a linha da nossa tabela que tem q atualizar, qual o fornecedor correto para atualizar
                 //vai procurar um fornecedor para atualizar utilizando nosso id
             }
         )
+    },
+
+    remover(id) {
+        return Modelo.destroy({ //metodo do sequelize que recebe objeto
+            where: { id: id }
+        })
     }
 }
